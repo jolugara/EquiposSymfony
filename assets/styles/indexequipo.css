@@ -1,0 +1,37 @@
+body{
+    background: #212529;
+}
+#titulo{
+    color: white;
+}
+
+table{
+    text-align: center;
+}
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+#card1{
+    width: 50%;
+    height: 50%;
+    margin: auto auto;
+    margin-top: 5%;
+    background: #8a8a8a;
+}
+#CorreoRegistrado{
+    color: white;
+}
+
+#btnaddequipo{
+    text-align: center;
+}
