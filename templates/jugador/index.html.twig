@@ -1,0 +1,203 @@
+{% extends 'base.html.twig' %}
+
+        {% block stylesheets %}
+            <style>
+                body{
+                   background-image: url("https://t4.ftcdn.net/jpg/04/21/56/51/360_F_421565174_o2Qihq7OyT9bs3jEe34A1RgaHR1Cc1iG.jpg");
+                }
+                #titulo{
+                    color: white;
+                    text-align: center;
+                }
+
+                table{
+                    text-align: center;
+                }
+                .bd-placeholder-img {
+                    font-size: 1.125rem;
+                    text-anchor: middle;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    user-select: none;
+                }
+
+                @media (min-width: 768px) {
+                    .bd-placeholder-img-lg {
+                        font-size: 3.5rem;
+                    }
+                }
+                #card1{
+                    width: 50%;
+                    height: 50%;
+                    margin: auto auto;
+                    margin-top: 5%;
+                    background: #8a8a8a;
+                }
+                #CorreoRegistrado{
+                    color: white;
+                    text-align: center;
+                }
+                #btnaddjugador{
+                    text-align: center;
+                }
+                @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+                .container__background-triangle{
+                    max-width: 1200px;
+                    height: 600px;
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    margin-top: 8%;
+                }
+
+                .triangle{
+                    width: 300px;
+                    height: 300px;
+                    background: red;
+                    position: absolute;
+                }
+
+                .triangle1{
+                    width: 250px;
+                    height: 250px;
+                    background: linear-gradient(to left, orange, #1e67c7);
+                    top: 100px;
+                    right: 400px;
+                    animation: t1 8s ease infinite;
+                }
+
+                .triangle2{
+                    width: 200px;
+                    height: 200px;
+                    background: linear-gradient(to left,#1e67c7 ,#5be1c9);
+                    top: -150px;
+                    animation: t2 9s ease infinite;
+                }
+
+                .triangle3{
+                    width: 300px;
+                    height: 300px;
+                    background: linear-gradient(to left, #1b8fc5, red);
+                    left: 370px;
+                    animation: t3 7s ease infinite;
+                }
+
+                @keyframes t1 {
+                    0%{
+                        transform: rotate(45deg) translateY(0px);
+                    }
+                    50%{
+                        transform: rotate(45deg) translateY(20px);
+                    }
+                    100%{
+                        transform: rotate(45deg) translateY(0px);
+                    }
+                }
+
+                @keyframes t2 {
+                    0%{
+                        transform: rotate(65deg) translateY(0px);
+                    }
+                    50%{
+                        transform: rotate(65deg) translateY(20px);
+                    }
+                    100%{
+                        transform: rotate(65deg) translateY(0px);
+                    }
+                }
+
+                @keyframes t3 {
+                    0%{
+                        transform: rotate(45deg) translateY(0px);
+                    }
+                    50%{
+                        transform: rotate(45deg) translateY(20px);
+                    }
+                    100%{
+                        transform: rotate(45deg) translateY(0px);
+                    }
+                }
+            </style>
+        {% endblock %}
+
+    {% block javascripts %}
+        <script>
+            $(document).ready( function () {
+                $('#myTable').DataTable({
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                    }
+                });
+            } );
+        </script>
+    {% endblock %}
+
+{% block title %}Lista Jugadores{% endblock %}
+{% block body %}
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="mb-auto">
+        <div>
+            <h3 class="float-md-start mb-0" id="titulo">SYMFONY</h3>
+            <nav class="nav nav-masthead justify-content-center float-md-end">
+                <a class="nav-link " aria-current="page" href="/">Home</a>
+                <a class="nav-link active" href="/jugador">Jugadores</a>
+                <a class="nav-link" href="/equipo">Equipos</a>
+                <a class="nav-link" href="/Contact.html">Contacto</a>
+            </nav>
+        </div>
+        <div class="mb-3" id="CorreoRegistrado">
+            Bienvenido {{ app.user.username }}, <a href="{{ path('app_logout') }}">Cerrar Sesion</a>
+        </div>
+    </header>
+    <br>
+    <div class="container__background-triangle">
+        <div class="triangle triangle1"></div>
+        <div class="triangle triangle2"></div>
+        <div class="triangle triangle3"></div>
+    </div>
+    <h3 class="float-md-start mb-0" id="titulo">Lista Jugadores</h3>
+    <div class="card" id="card1">
+        <div class="card-body">
+    <table id="myTable" class="table table-dark table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Posicion</th>
+                <th>Fecha_nacimiento</th>
+                <th>Salario</th>
+                <th>Equipo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for jugador in jugadors %}
+            <tr>
+                <td>{{ jugador.id }}</td>
+                <td>{{ jugador.nombre }}</td>
+                <td>{{ jugador.posicion }}</td>
+                <td>{{ jugador.fechaNacimiento ? jugador.fechaNacimiento|date('Y-m-d') : '' }}</td>
+                <td>{{ jugador.salario }}</td>
+                <td>{{ jugador.equipo }}</td>
+                <td>
+                    <a href="{{ path('app_jugador_show', {'id': jugador.id}) }}"><i class="bi bi-eye-fill"></i></a>
+                    <a href="{{ path('app_jugador_edit', {'id': jugador.id}) }}"><i class="bi bi-pencil-square"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+            <div class="card-footer" id="btnaddjugador">
+                <a id="btnAñadir" type="button" class="btn btn-secondary" href="{{ path('app_jugador_new') }}">Añadir Jugador</a>
+            </div>
+    </div>
+    </div>
+</div>
+
+{% endblock %}

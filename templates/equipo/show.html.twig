@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <style>
+        body{
+            background-image: url("https://t4.ftcdn.net/jpg/04/21/56/51/360_F_421565174_o2Qihq7OyT9bs3jEe34A1RgaHR1Cc1iG.jpg");
+        }
+        #titulo{
+            color: white;
+            text-align: center;
+        }
+
+        table{
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+        #card1{
+            width: 50%;
+            height: 50%;
+            margin: auto auto;
+            margin-top: 10%;
+            background: #8a8a8a;
+        }
+        #card2{
+            width: auto;
+            height: auto;
+            margin: auto auto;
+            margin-top: -20%;
+            background: #8a8a8a;
+        }
+        #CorreoRegistrado{
+            color: white;
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}Equipo{% endblock %}
+
+{% block body %}
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="mb-auto">
+        <div>
+            <h3 class="float-md-start mb-0" id="titulo">SYMFONY</h3>
+            <nav class="nav nav-masthead justify-content-center float-md-end">
+                <a class="nav-link " aria-current="page" href="/">Home</a>
+                <a class="nav-link active" href="/jugador">Jugadores</a>
+                <a class="nav-link" href="/equipo">Equipos</a>
+                <a class="nav-link" href="/Contact.html">Contacto</a>
+            </nav>
+        </div>
+        <div class="mb-3" id="CorreoRegistrado">
+            Bienvenido {{ app.user.username }}, <a href="{{ path('app_logout') }}">Cerrar Sesion</a>
+        </div>
+    </header>
+        <br>
+        <h3 class="float-md-start mb-0" id="titulo">Club: {{ equipo.nombre }}</h3>
+    <div class="card" id="card1">
+        <div class="card-body">
+    <table class="table table-dark table-striped table-bordered">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ equipo.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ equipo.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Liga</th>
+                <td>{{ equipo.liga }}</td>
+            </tr>
+            <tr>
+                <th>Tam_plantilla</th>
+                <td>{{ equipo.tamPlantilla }}</td>
+            </tr>
+            <tr>
+                <th>Presupuesto</th>
+                <td>{{ equipo.presupuesto }}</td>
+            </tr>
+            <tr>
+                <th>Fecha_fundacion</th>
+                <td>{{ equipo.fechaFundacion ? equipo.fechaFundacion|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <div class="btn-group-vertical" id="card2">
+        <a type="button" class="btn btn-primary" href="{{ path('app_equipo_index') }}">Volver</a>
+
+        <a type="button" class="btn btn-info" href="{{ path('app_equipo_edit', {'id': equipo.id}) }}">Editar</a>
+
+        <a type="button">{{ include('equipo/_delete_form.html.twig') }}</a>
+    </div>
+{% endblock %}

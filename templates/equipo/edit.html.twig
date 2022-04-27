@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+        {% block stylesheets %}
+            <style>
+                body{
+                    background-image: url("https://t4.ftcdn.net/jpg/04/21/56/51/360_F_421565174_o2Qihq7OyT9bs3jEe34A1RgaHR1Cc1iG.jpg");
+                }
+                #titulo{
+                    color: white;
+                    text-align: center;
+                }
+
+                table{
+                    text-align: center;
+                }
+                #card1{
+                    width: 50%;
+                    height: 50%;
+                    margin: auto auto;
+                    margin-top: 5%;
+                    background: #8a8a8a;
+                }
+                #CorreoRegistrado{
+                    color: white;
+                    text-align: center;
+                }
+            </style>
+        {% endblock %}
+
+{% block title %}Edit Equipo{% endblock %}
+
+{% block body %}
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+            <div>
+                <h3 class="float-md-start mb-0" id="titulo">Editar Equipo</h3>
+                <nav class="nav nav-masthead justify-content-center float-md-end">
+                    <a class="nav-link " aria-current="page" href="/">Home</a>
+                    <a class="nav-link active" href="/jugador">Jugadores</a>
+                    <a class="nav-link" href="/equipo">Equipos</a>
+                    <a class="nav-link" href="/Contact.html">Contacto</a>
+                </nav>
+            </div>
+            <div class="mb-3" id="CorreoRegistrado">
+                Bienvenido {{ app.user.username }}, <a href="{{ path('app_logout') }}">Cerrar Sesion</a>
+            </div>
+        </header>
+        <br>
+        <h3 class="float-md-start mb-0" id="titulo">Equipo: {{ equipo.nombre }}</h3>
+        <div class="card" id="card1">
+            <div class="card-body">
+                {{ include('equipo/_form.html.twig', {'button_label': 'Update'}) }}
+
+                <a href="{{ path('app_equipo_index') }}">back to list</a>
+
+                {{ include('equipo/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
